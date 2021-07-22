@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'KiwiMaru';
+    src: url('./fonts/KiwiMaru-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'SourceCodePro';
+    src: url('./fonts/SourceCodePro-Regular.ttf') format('truetype');
+}
+#univName_id {
+    font-family: 'KiwiMaru';
+}
+#univNameEng_id {
+    font-family: 'SourceCodePro';
+}
