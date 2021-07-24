@@ -1,15 +1,16 @@
-/* 全体に渡って使用する変数を定義 */
+/* グローバル変数（全体に渡って使用する変数）を定義 */
 let univName
 let univNameEng
 let univColor
-let count
+let imageBase64
+let i = 0;
 
 /* ページ読み込み時に実行する処理を記述 */
 onload = function() {
     /* GETパラメータ（クエリ文字列）を取得する処理 */
     let params = new URL(document.location).searchParams;
     /* GETパラメータが存在する場合には以下の処理を実行 */
-    if (params.get('univName') != null) {
+    if (params.get('univName') != null || params.get('univNameEng') != null || params.get('univColor') != null ) {
         /* 各GETパラメータから内容を取得 */
         univName = params.get('univName');
         univNameEng = params.get('univNameEng');
@@ -20,24 +21,34 @@ onload = function() {
         document.getElementById('univNameEng_id').value = univNameEng;
         document.getElementById('univColor_id').value = univColor;
 
-        count = 1; // 変数countを1にすることで関数drawImg内で二重に処理が実行されることを防ぐ
+        /* 関数drawHTMLとdrawImageを実行 */
+        drawHTML();
+        drawImage();
+    } else {
+        /* 関数clickButtonを実行 */
+        clickButton();
     }
-
-    drawImg(); // 読み込み時に関数drawImgを実行
 }
-function drawImg() {
-    /* 変数countが1以外の場合に以下の処理を実行 */
-    if (count != 1) {
-        /* 各テキストボックスから内容を取得 */
-        univName = document.getElementById('univName_id').value;
-        univNameEng = document.getElementById('univNameEng_id').value;
-        univColor = document.getElementById('univColor_id').value;
-    }
-    count = 2; // 変数countを2にすることで次回以降、上記の処理を行うようにする
+function clickButton() {
+    /* 各テキストボックスから内容を取得 */
+    univName = document.getElementById('univName_id').value;
+    univNameEng = document.getElementById('univNameEng_id').value;
+    univColor = document.getElementById('univColor_id').value;
 
     /* GETパラメータをURLに付け加える */
     history.pushState('','','?univName=' + univName + '&univNameEng=' + univNameEng + '&univColor=' + univColor);
 
+    /* 関数drawImageを実行 */
+    drawImage();
+
+    /* localStorageに配列を保存する処理 */
+    let saveData = [univName, univNameEng, univColor, imageBase64]; // localStorageに保存する配列
+    localStorage.setItem(i, JSON.stringify(saveData)); // localStorageにJSONに変換した配列を保存（keyは変数iとして、0から順番に入れていく）
+
+    /* 関数drawHTMLを実行 */
+    drawHTML();
+}
+function drawImage() {
     /* canvsの描写設定 */
     let canvas = document.getElementById('logoGene');
     let ctx = canvas.getContext('2d');
@@ -50,5 +61,24 @@ function drawImg() {
     ctx.font = '50px KiwiMaru'; // 漢字部分のフォント指定、フォントサイズ指定
     ctx.fillText(univName, 150, 95, 290); // 漢字部分の内容を変数univNameから読み込む
     ctx.font = '23px SourceCodePro'; // 英字部分のフォント指定、フォントサイズ指定
-    ctx.fillText(univNameEng, 151, 128, 290); // 英字部分内容を変数univNameから読み込む
+    ctx.fillText(univNameEng, 151, 128, 290); // 英字部分の内容を変数univNameから読み込む
+
+    imageBase64 = canvas.toDataURL("image/png"); // 画像をbase64化して変数imageBase64に入れる
+}
+function drawHTML() {
+    /* localStorageに保存した情報をHTMLとして書き出す処理 */
+    while (i < localStorage.length) {
+        let readData = JSON.parse(localStorage.getItem(i)); // localStorageから保存した情報を読み込む
+        let newElement = document.createElement('div'); // 新規にdiv要素を作成
+        /* 書き出すHTMLを作成 */
+        newElement.innerHTML = 
+        (i + 1)+'個目<br>'
+        +readData[0]+'<br>'
+        +readData[1]+'<br>'
+        +readData[2]+'<br>'
+        +'<a href="./index.html?univName=' + readData[0] + '&univNameEng=' + readData[1] + '&univColor=' + readData[2] + '">編集する</a><br>'
+        +'<img style="width:200px;height:80px;" src="'+ readData[3] +'" alt="">';
+        document.getElementById('dispHistory').prepend(newElement); // 作成したHTMLをid="dispHistory"の要素の前に追加する
+        i++;
+    }
 }
