@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./generator/style.css">
+    <title>基礎プログラミング演習1 最終課題</title>
+</head>
+<body>
+    <h1>TCUロゴジェネレーター</h1>
+    <p>
+        基礎プログラミング演習1 最終課題<br>
+        2171023 木本祥太郎
+    </p>
+    <h2>課題リンク</h2>
+    <p>
+        <a href="./generator/index.html">TCUロゴジェネレーター</a>
+    </p>
+    <h2>コンセプト</h2>
+    <p>
+        現在インターネット上では、企業のロゴ、またアニメ風のロゴを作成できるようなツールが多数公開されています。<br>
+        私はそれらのものから着想を得て、東京都市大学のシンボルマーク風のロゴを作成できるツールを作成することにしました。
+    </p>
+    <h2>目的</h2>
+        <ul>
+            <li>ロゴを作成して楽しむ</li>
+            <li>作成した画像をSNS等にシェアする</li>
+        </ul>
+    <h2>操作方法</h2>
+    <h3>基本</h3>
+    <p>
+        テキストボックスに画像の中に入れたい言葉を入れて「作成！」ボタンを押すと、画像が生成されます。<br>
+        生成した画像は、ページ下部の「履歴」欄に一覧で表示され、後から確認や編集をすることができます。<br>
+        localStorageを使用しているので、ページを閉じても履歴が消えることはありません。
+    </p>
+    <h3>応用</h3>
+    <p>
+        GETパラメータでテキストボックスの値を指定することもできます。<br>
+        例えば「武蔵工業大学（Musashi Institute of Technology）」という画像を生成するとします。<br>
+        その場合、URLの末尾に「?univName=武蔵工業大学&univNameEng=Musa<span class="KiwiMaru">...</span>gy&univColor=00a7eb」を付け加えることで、
+        指定された値の画像が生成された状態で<a href="./generator/index.html?univName=%E6%AD%A6%E8%94%B5%E5%B7%A5%E6%A5%AD%E5%A4%A7%E5%AD%A6&univNameEng=Musashi%20Institute%20of%20Technology&univColor=00a7eb">このように</a>ページが開きます。<br>
+        なお、GETパラメータが未設定の場合には初期値として「東京都市大学（TOKYO CITY UNIVERSITY）」が入力されます。
+    </p>
+        <table>
+            <caption>GETパラメータに設定できる値</caption>
+            <tbody>
+                <tr>
+                    <td>univName</td>
+                    <td>画像に入れる文字（日本語部分）</td>
+                </tr>
+                <tr>
+                    <td>univNameEng</td>
+                    <td>画像に入れる文字（英語部分）</td>
+                </tr>
+                <tr>
+                    <td>univColor</td>
+                    <td>ロゴの色（#を除いたカラーコード）</td>
+                </tr>
+            </tbody>
+        </table>
+    <h2>技術</h2>
+    <p>
+        画像の描画にCanvas、履歴の保存にlocalStorageを使用しました。<br>
+        なお、指定された要素は以下の場所で使用しています。
+    </p>
+        <ul>
+            <li>イベントモデル: index.html 16行目</li>
+            <li>条件分岐: script.js 12行目</li>
+            <li>繰り返し: script.js 73行目</li>
+            <li>配列: script.js 45行目など</li>
+        </ul>
+    <h2>参考</h2>
+    <p>
+        「Canvas API - Web API | MDN」<a href="https://developer.mozilla.org/ja/docs/Web/API/Canvas_API">https://developer.mozilla.org/ja/docs/Web/API/Canvas<span class="SourceCodePro">_</span>API</a><br>
+        「Window.localStorage - Web API | MDN」<a href="https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage">https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage</a><br>
+        「URL.searchParams - Web API | MDN」<a href="https://developer.mozilla.org/ja/docs/Web/API/URL/searchParams">https://developer.mozilla.org/ja/docs/Web/API/URL/searchParams</a><br>
+        「History.pushState() - Web API | MDN」<a href="https://developer.mozilla.org/ja/docs/Web/API/History/pushState">https://developer.mozilla.org/ja/docs/Web/API/History/pushState</a><br>
+    </p>
+</body>
+</html>
