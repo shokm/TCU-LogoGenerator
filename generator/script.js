@@ -77,14 +77,14 @@ function drawHTML() {
         /* HTMLに関する処理 */
         let newElement = document.createElement('div'); // 新規にdiv要素を作成
         newElement.innerHTML = ''
-            +'<div class="drawHistory"><br>'
+            + '<div class="drawHistory"><br>'
             + (i + 1) + '個目<br>'
             + '<img style="width:200px;height:80px;" src="' + readData[3] + '" alt=""><br>'
             + '単語: ' + readData[0] + '<br>'
             + '英字: ' + readData[1] + '<br>'
             + '色コード: #' + readData[2] + '<br>'
             + '<a href="./index.html?univName=' + readData[0] + '&univNameEng=' + readData[1] + '&univColor=' + readData[2] + '">編集する</a>'
-            +'</div>';
+            + '</div>';
         document.getElementById('dispHistory').prepend(newElement); // 作成したHTMLをid="dispHistory"の要素の前に追加する
 
         i++;
