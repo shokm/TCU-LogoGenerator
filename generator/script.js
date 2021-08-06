@@ -56,8 +56,8 @@ function drawImage() {
 
     ctx.clearRect(0, 0, 500, 500); // 描写するたびに初期化
     ctx.fillStyle = '#' + univColor; // ロゴの色指定、カラーコードを変数univColorから読み込む
-    ctx.fillRect(50, 52, 86, 46) // ロゴ四角（上）
-    ctx.fillRect(61, 109, 24, 24) // ロゴ四角（下）
+    ctx.fillRect(50, 52, 86, 46); // ロゴ四角（上）
+    ctx.fillRect(61, 109, 24, 24); // ロゴ四角（下）
     ctx.fillStyle = '#333333'; // 文字の色指定
     ctx.font = '50px KiwiMaru'; // 漢字部分のフォント指定、フォントサイズ指定
     ctx.fillText(univName, 150, 95, 290); // 漢字部分の内容を変数univNameから読み込む
