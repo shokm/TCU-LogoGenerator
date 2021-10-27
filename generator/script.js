@@ -25,6 +25,7 @@ onload = function() {
         univNameEng = document.getElementById('univNameEng_id').value;
         univColor = document.getElementById('univColor_id').value;
     }
+
     drawImage();
     drawHTML();
 }
@@ -59,12 +60,21 @@ function drawImage() {
     ctx.fillRect(50, 52, 86, 46); // ロゴ四角（上）
     ctx.fillRect(61, 109, 24, 24); // ロゴ四角（下）
     ctx.fillStyle = '#333333'; // 文字の色指定
-    ctx.font = '50px KiwiMaru'; // 漢字部分のフォント指定、フォントサイズ指定
+    ctx.font = '50px Kiwi Maru'; // 漢字部分のフォント指定、フォントサイズ指定
     ctx.fillText(univName, 150, 95, 290); // 漢字部分の内容を変数univNameから読み込む
-    ctx.font = '23px SourceCodePro'; // 英字部分のフォント指定、フォントサイズ指定
+    ctx.font = '23px Source Code Pro'; // 英字部分のフォント指定、フォントサイズ指定
     ctx.fillText(univNameEng, 151, 128, 290); // 英字部分の内容を変数univNameから読み込む
 
     imageBase64 = canvas.toDataURL("image/png"); // 画像をbase64化して変数imageBase64に入れる
+
+    /* Canvasにフォントが読み込まれないことがあるため、一秒後に再描写 */
+    if (document.cookie < 1){ // 1以下の場合なので次回以降は2が設定されリロードしない
+        window.setTimeout(
+            function(){
+                drawImage(); // リロード処理
+            }, 1000); // 1000ミリ秒（1秒後）
+        document.cookie = 100 + '; max-age=2'; // Cookieに100を設定、2秒後に破棄
+    }
 }
 
 /** localStorageに保存した情報をHTMLとして書き出す処理 **/
