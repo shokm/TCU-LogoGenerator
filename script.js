@@ -68,13 +68,9 @@ function drawImage() {
     imageBase64 = canvas.toDataURL("image/png"); // 画像をbase64化して変数imageBase64に入れる
 
     /* Canvasにフォントが読み込まれないことがあるため、一秒後に再描写 */
-    if (document.cookie < 1){ // 1以下の場合なので次回以降は2が設定されリロードしない
-        window.setTimeout(
-            function(){
-                drawImage(); // リロード処理
-            }, 1000); // 1000ミリ秒（1秒後）
-        document.cookie = 100 + '; max-age=2'; // Cookieに100を設定、2秒後に破棄
-    }
+    window.setTimeout(function() {
+        drawImage(); // リロード処理
+    }, 1000); // 1000ミリ秒（1秒後）
 }
 
 /** localStorageに保存した情報をHTMLとして書き出す処理 **/
