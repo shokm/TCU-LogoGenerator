@@ -89,7 +89,7 @@ function drawHTML() {
             + '単語: ' + readData[0] + '<br>'
             + '英字: ' + readData[1] + '<br>'
             + '色コード: #' + readData[2] + '<br>'
-            + '<a href="./index.html?univName=' + readData[0] + '&univNameEng=' + readData[1] + '&univColor=' + readData[2] + '">編集する</a>'
+            + '<a href="./?univName=' + readData[0] + '&univNameEng=' + readData[1] + '&univColor=' + readData[2] + '">編集する</a>'
             + '</div>';
         document.getElementById('dispHistory').prepend(newElement); // 作成したHTMLをid="dispHistory"の要素の前に追加する
 
