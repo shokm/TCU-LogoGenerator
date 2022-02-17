@@ -1,8 +1,8 @@
 /** グローバル変数を定義 **/
-let univName
-let univNameEng
-let univColor
-let imageBase64
+let univName;
+let univNameEng;
+let univColor;
+let imageBase64;
 let i = 0;
 
 /** ページ読み込み時に実行する処理 **/
